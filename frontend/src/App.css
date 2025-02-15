@@ -1,0 +1,19 @@
+  
+  html, body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .contact {
+    overflow: auto; 
+  }
+  
+  .contact::-webkit-scrollbar {
+    width: 2px; /* Make scrollbar thin */
+  }
+  
+  .contact::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 8px;
+  }
+  
+    
