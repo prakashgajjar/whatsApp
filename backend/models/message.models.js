@@ -8,4 +8,5 @@ const MessageSchema = new mongoose.Schema({
   isRead: { type: Boolean, default: false },
 }, { timestamps: true });
 
-export const Message = mongoose.model("Message", MessageSchema);
+
+module.exports = mongoose.model("Message", MessageSchema);
