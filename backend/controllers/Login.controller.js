@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/user.models.js')
 const login = async (req,res)=>{
   const  {email , password} = req.body;
@@ -14,7 +15,9 @@ const login = async (req,res)=>{
         console.log("Password mismatch");
         return res.status(402).json({ message: "Invalid password" });
     }
-    console.log("Login successful");
+            const token = jwt.sign({ userId: user._id }, "prakash", { expiresIn: "7d" });
+            res.cookie("loginToken", token, { httpOnly: true }); 
+            console.log("Login successful");
     res.status(200).json({ message: "Login successful", user });
 
     }catch(error){

@@ -9,12 +9,11 @@ const Home = () => {
     setTimeout(() => {
       setLoading(false); 
     }, 1500);
-  }, [loading]);
+  }, []);
 
   return (
     <>
       {loading ? (
-        // 🔹 WhatsApp-Style Loader
         <div className="flex items-center justify-center h-screen bg-zinc-900">
           <div className="flex flex-col items-center">
             <img src="/icons/whatapp1.png" className="w-12 h-12 mb-4" alt="WhatsApp Logo" />

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate, useNavigation } from "react-router-dom";
+import contextProvider from "../../Hooks/ContextProvider";
 export default function LoginPage() {
+  const {userName , setUserName} = useContext(contextProvider)
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [isSignup, setIsSignup] = useState(false);
@@ -22,12 +24,16 @@ export default function LoginPage() {
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
+        if (responseSignup.status === 200) {
+          setUserName(formData.get("name"));
+          navigate('/home');
+      }
         console.log("Signup Response:", responseSignup);
       } else {
         const responseLogin = await axios.post("http://localhost:3000/login", {
           email,
           password,
-        });
+        },{ withCredentials: true } );
         if (responseLogin.status === 200) {
             navigate('/home');
         }

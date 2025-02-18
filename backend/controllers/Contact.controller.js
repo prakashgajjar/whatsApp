@@ -1,7 +1,18 @@
-const User = require('../models/user.models.js')
-const contacts = (req,res)=>{
-    const users = User.find({})
-    res.json({name : users.name , avtar: users.avatar  })
-}
+const User = require('../models/user.models.js');
+
+const contacts = async (req, res) => {
+    try {
+        const users = await User.find({});
+        if (users.length === 0) {
+            return res.status(404).json({ message: "No users found" });
+        }
+        const userData = users.map((user)=>{
+            return {name: user.name, avatar: user.avatar}
+        });
+        res.json(userData);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
 module.exports = contacts;
