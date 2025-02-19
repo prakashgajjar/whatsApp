@@ -27,8 +27,6 @@ const HeaderProfile = () => {
             <h1 className="text-xs font-bold uppercase text-gray-400">Select a user</h1>
           )}
         </div>
-
-        {/* Right Section - Search Icon (Always Visible) */}
         <div>
           <svg
             width="18"

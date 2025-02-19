@@ -4,7 +4,7 @@ import contextProvider from "../../Hooks/ContextProvider";
 import axios from "axios";
 
 const ChatMain = () => {
-  const { selectedId, currentUserId } = useContext(contextProvider); // Get logged-in user ID
+  const { selectedId, currentUserId } = useContext(contextProvider);
   const [messages, setMessages] = useState([]);
   const chatEndRef = useRef(null);
 
@@ -15,7 +15,7 @@ const ChatMain = () => {
       const response = await axios.get(`http://localhost:3000/message/get/${selectedId}`, {
         withCredentials: true,
       });
-      setMessages(response.data); // Assuming response.data is an array of messages
+      setMessages(response.data);
     } catch (error) {
       console.error("Error fetching chat:", error);
     }
@@ -34,10 +34,16 @@ const ChatMain = () => {
               key={index}
               className={`p-3 rounded-lg max-w-xs ${
                 msg.sender === currentUserId
-                  ? "bg-[#025C4C] text-white ml-auto" // Sent message (right side)
-                  : "bg-zinc-900 text-white mr-auto" // Received message (left side)
+                  ? "bg-[#025C4C] text-white mr-auto" // Sent message (right side)
+                  : "bg-zinc-900 text-white ml-auto" // Received message (left side)
               }`}
             >
+              {/* Display sender's name if it's NOT the current user */}
+              {msg.sender !== currentUserId && (
+                <p className="text-xs font-semibold text-gray-300 mb-1">
+                  {msg.senderName}
+                </p>
+              )}
               {msg.content}
             </div>
           ))

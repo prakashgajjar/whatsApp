@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useNavigation } from "react-router-dom";
 import contextProvider from "../../Hooks/ContextProvider";
 export default function LoginPage() {
-  const {userName , setUserName} = useContext(contextProvider)
+  const {userName , setUserName , setCurrentUser} = useContext(contextProvider)
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [isSignup, setIsSignup] = useState(false);
@@ -35,6 +35,8 @@ export default function LoginPage() {
           password,
         },{ withCredentials: true } );
         if (responseLogin.status === 200) {
+          console.log("Login Response:", responseLogin.data._id);
+          setCurrentUser(responseLogin.data._id);
             navigate('/home');
         }
       }

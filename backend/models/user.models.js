@@ -8,10 +8,7 @@ const UserSchema = mongoose.Schema({
     lastSeen: Date,
     status: String,
     isOnline: Boolean,
-    // conversations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'chat' }],
-    // pendingFriends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    // blockedFriends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    // friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    conversations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Conversation' }],
 })
 
 module.exports = mongoose.model('User', UserSchema);

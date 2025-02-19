@@ -12,6 +12,7 @@ const App = () => {
   const [message, setMessage] = useState('')
   const[contact , setContact] = useState([])
   const[selectedId , setSelectedId] = useState("");
+  const[currentUserId , setCurrentUser] = useState('')
   const[headerProfile , setHeaderProfile] = useState({}); // that use for when we click contact that show user detail
 
   // socket.on('message', (data) => {
@@ -25,7 +26,7 @@ const App = () => {
   
   return (
     <>
- <ContextProvider.Provider value={{contact , setContact , setMessage ,message , headerProfile ,setHeaderProfile ,selectedId, setSelectedId }}>
+ <ContextProvider.Provider value={{contact , setContact , currentUserId , setCurrentUser , setMessage ,message , headerProfile ,setHeaderProfile ,selectedId, setSelectedId }}>
  <div className='w-screen h-screen overflow-hidden'>
         <Routes>
           <Route path='/' element={<LoginPage />} />
