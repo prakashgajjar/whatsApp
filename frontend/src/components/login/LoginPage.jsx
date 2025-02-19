@@ -36,7 +36,6 @@ export default function LoginPage() {
         },{ withCredentials: true } );
         if (responseLogin.status === 200) {
           console.log("Login Response:", responseLogin.data._id);
-          setCurrentUser(responseLogin.data._id);
             navigate('/home');
         }
       }

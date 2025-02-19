@@ -33,15 +33,15 @@ const ChatMain = () => {
             <div
               key={index}
               className={`p-3 rounded-lg max-w-xs ${
-                msg.sender === currentUserId
-                  ? "bg-[#025C4C] text-white mr-auto" // Sent message (right side)
-                  : "bg-zinc-900 text-white ml-auto" // Received message (left side)
+                msg.sender._id === currentUserId
+                  ? "bg-[#025C4C] text-white ml-auto" // Sent message (right side)
+                  : "bg-zinc-900 text-white mr-auto" // Received message (left side)
               }`}
             >
               {/* Display sender's name if it's NOT the current user */}
-              {msg.sender !== currentUserId && (
+              {msg.sender._id !== currentUserId && (
                 <p className="text-xs font-semibold text-gray-300 mb-1">
-                  {msg.senderName}
+                  {msg.sender.name}
                 </p>
               )}
               {msg.content}

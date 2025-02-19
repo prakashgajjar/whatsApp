@@ -11,10 +11,10 @@ const Contact = require('./routes/Contact.routes.js');
 const mongooDB = require('./config/MongooseConnect.js');
 const Chat = require('./controllers/Chat.controller.js');
 const Messages = require('./routes/Message.routes.js');
+const CurrentUser = require('./routes/CurrentUser.routes.js');
 const cookieParser = require('cookie-parser');
 
 const jwt = require('jsonwebtoken');
-
 require('dotenv').config();
 
 const app = express();
@@ -42,6 +42,7 @@ app.use('/signup', upload.single('avatar'), Signup);
 app.use('/login', Login);
 app.use('/contact', Contact);
 app.use('/message',Messages)
+app.use('/userfind',CurrentUser)
 
 const uploadDir = path.join(__dirname, '/public/images');
 if (!fs.existsSync(uploadDir)) {

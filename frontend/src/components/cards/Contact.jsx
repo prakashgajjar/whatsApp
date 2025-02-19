@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { CurrentUser } from './CurrentUser'
 
 const contact = ({contact , selectedId}) => {
     const divRef = useRef(null)
@@ -16,6 +17,7 @@ const contact = ({contact , selectedId}) => {
                     <p className='text-sm font-light opacity-70 cursor-default'>hii, i am prakash</p>
                 </div>
                 <div>
+                    <CurrentUser/>
                     <h1 className='text-sm opacity-40 -mt-4'>22:05</h1>
                 </div>
             </div>
