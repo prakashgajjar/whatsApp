@@ -3,7 +3,6 @@ const signup = async (req,res)=>{
     const {name, email, password } = req.body;
     const avatar = req.file
     try{
-
      const user = await User.create({
             name,
             email,
@@ -18,5 +17,4 @@ const signup = async (req,res)=>{
         res.status(500).json({error: error.message})
     }
 }
-
 module.exports = signup;

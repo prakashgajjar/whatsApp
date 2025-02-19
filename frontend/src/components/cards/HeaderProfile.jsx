@@ -8,7 +8,6 @@ const HeaderProfile = () => {
     <div className="h-16 w-full bg-zinc-800 text-white">
       <div className="flex justify-between items-center gap-3 w-full h-16 px-5">
         
-        {/* Left Section - Profile Image & Name */}
         <div className="flex items-center">
           {headerProfile ? (
             <>

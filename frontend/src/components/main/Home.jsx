@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MainDisplay from './MainDisplay';
-import Icons from '../cards/icons';
+import Icons from '../cards/Icons';
 
 const Home = () => {
   const [loading, setLoading] = useState(true); 

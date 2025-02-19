@@ -8,7 +8,6 @@ const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const chatEndRef = useRef(null);
 
-  // Fetch chat messages
   const getAllChat = async () => {
     if (!selectedId) return;
     try {
@@ -34,8 +33,8 @@ const ChatMain = () => {
               key={index}
               className={`p-3 rounded-lg max-w-xs ${
                 msg.sender._id === currentUserId
-                  ? "bg-[#025C4C] text-white ml-auto" // Sent message (right side)
-                  : "bg-zinc-900 text-white mr-auto" // Received message (left side)
+                  ? "bg-[#025C4C] text-white ml-auto" // Sent message
+                  : "bg-zinc-900 text-white mr-auto" // Received message
               }`}
             >
               {/* Display sender's name if it's NOT the current user */}

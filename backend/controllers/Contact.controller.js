@@ -3,7 +3,6 @@ const User = require('../models/user.models.js');
 const contacts = async (req, res) => {
     try {
         const loggedInUserId = req.user.userId;
-
         const users = await User.find({ _id: { $ne: loggedInUserId } });
         if (users.length === 0) {
             return res.status(404).json({ message: "No users found" });

@@ -5,7 +5,6 @@ import contextProvider from '../../Hooks/ContextProvider';
 
 const ContactComponent = () => {
   const { contact, setContact, headerProfile, setHeaderProfile, setSelectedId, selectedId } = useContext(contextProvider);
-
   const getContacts = async () => {
     try {
       const response = await axios.get('http://localhost:3000/contact' , {

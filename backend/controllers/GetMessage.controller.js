@@ -1,5 +1,5 @@
 const Conversation = require("../models/conversation.models");
-const Message = require("../models/message.models"); // Import Message Model
+const Message = require("../models/message.models");
 
 const getMessage = async (req, res) => {
   try {
@@ -10,17 +10,15 @@ const getMessage = async (req, res) => {
     const conversation = await Conversation.findOne({
       participants: { $all: [senderId, chatUser] },
     });
-
     if (!conversation) {
       console.log("hello world");
       return res.status(200).json({ message: "Conversation not found" });
     }
-
     // Fetch messages linked to this conversation
     const messages = await Message.find({ chat: conversation._id }) 
-      .populate("sender" ,"name" ) // Get sender's name
-      .populate("receiver", "name") // Get receiver's name
-      .sort({ createdAt: 1 }); // Sort messages by time
+      .populate("sender" ,"name" ) 
+      .populate("receiver", "name") 
+      .sort({ createdAt: 1 });
     console.log(messages); 
     res.status(200).json(messages);
   } catch (error) {

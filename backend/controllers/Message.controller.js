@@ -7,11 +7,9 @@ const sendMessage = async (req, res) => {
         console.log(message);
         const { id: receiverId } = req.params;
         const senderId = req.user.userId;
-
         if (!message || !receiverId || !senderId) {
             return res.status(400).json({ error: "All fields are required" });
         }
-
         let conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] },
         });
@@ -23,18 +21,14 @@ const sendMessage = async (req, res) => {
             });
             await conversation.save();
         }
-
-        // Create and save the message with the required chat field
         const newMessage = new Message({
             sender: senderId,
             receiver: receiverId,
-            chat: conversation._id, //  Linking message to conversation
-            content: message, //  Using `content` instead of `message`
+            chat: conversation._id,
+            content: message, //  Using content instead of message
             messageType: "text",
         });
-
         await newMessage.save();
-
         conversation.messages.push(newMessage._id);
         await conversation.save();
 

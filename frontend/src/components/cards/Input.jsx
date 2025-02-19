@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import Icons from './icons'
+import Icons from './Icons'
 import contextProvider from '../../Hooks/ContextProvider'
 import axios from 'axios'
 const Input = () => {
