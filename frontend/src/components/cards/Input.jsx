@@ -3,8 +3,9 @@ import Icons from './icons'
 import contextProvider from '../../Hooks/ContextProvider'
 import axios from 'axios'
 const Input = () => {
-    const getdata = async () =>{
-        axios.post('http://localhost:3000/message/send/1222', { message: "Hello World" }, { withCredentials: true })
+    const {setMessage,message,contact , setContact , headerProfile ,setHeaderProfile , setSelectedId  , selectedId } = useContext(contextProvider);
+    const sendMessage = async () =>{
+        axios.post(`http://localhost:3000/message/send/${selectedId}`, { message: message }, { withCredentials: true })
     .then(response => {
         console.log(response.data);
     })
@@ -13,10 +14,6 @@ const Input = () => {
     });
 
     }
-    useEffect(()=>{
-        getdata()
-    })
-    const { setMessage, message  , sendMessageToUser } = useContext(contextProvider)
     return (
         <div className="bg-zinc-800 flex  items-center gap-3 w-full h-16 z-50 ">
             <div>
@@ -36,7 +33,8 @@ const Input = () => {
             <div className='flex justify-center items-center ml-2 -mt-2'>
                 <img src="/icons/send.png" className='' alt="" 
                 onClick={()=>{
-                    sendMessageToUser()
+                    // sendMessageToUser()
+                    sendMessage()
                     setMessage('')
                 }}
                 />

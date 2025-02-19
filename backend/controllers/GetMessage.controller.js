@@ -7,7 +7,7 @@ try {
     const senderId = req.user.userId;
     const conversation = await Conversation.findOne({
         participants : { $all : [senderId , chatUser] }
-    }).populate("messages");
+    }).populate("messages")
     if(!conversation){
         console.log("hello world");
         return res.status(200).json({message: "Conversation not found"});
