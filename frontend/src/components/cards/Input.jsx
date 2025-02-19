@@ -12,7 +12,6 @@ const Input = () => {
     .catch(error => {
         console.error("Error:", error);
     });
-
     }
     return (
         <div className="bg-zinc-800 flex  items-center gap-3 w-full h-16 z-50 ">
