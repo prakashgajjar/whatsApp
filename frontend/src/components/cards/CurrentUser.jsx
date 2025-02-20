@@ -8,7 +8,6 @@ export const CurrentUser = () => {
             const response = await axios.get(`http://localhost:3000/userfind`, {
               withCredentials: true,
             });
-            console.log(response)
             setCurrentUser(response.data._id);
             
           } catch (error) {

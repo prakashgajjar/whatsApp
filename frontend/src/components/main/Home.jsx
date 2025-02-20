@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MainDisplay from './MainDisplay';
 import Icons from '../cards/Icons';
+import contextProvider from '../../Hooks/ContextProvider';
+import axios from 'axios';
 
 const Home = () => {
+
+  const {metaDisplay , setMetaDisplay} = useContext(contextProvider);
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
@@ -30,14 +34,18 @@ const Home = () => {
             </div>
             <div className="flex flex-col absolute -left-4 top-16 gap-3">
               <Icons url="/icons/menu.png" />
+              <div onClick={()=>{setMetaDisplay(false)}}>
               <Icons url="/icons/message1.png" />
+              </div>
               <Icons url="/icons/call1.png" />
               <Icons url="/icons/status1.png" />
               <div className="ml-[14px]">
                 <hr className="opacity-20 w-8 ml-2 relative border-white bg-white" />
               </div>
             </div>
-            <div className="flex flex-col absolute -left-4 top-[260px]">
+            <div className="flex flex-col absolute -left-4 top-[260px]" onClick={()=>{
+              setMetaDisplay(true);
+            }}>
               <Icons url="/icons/meta.png" />
             </div>
             <div className="absolute bottom-2 flex flex-col justify-center items-center gap-2 -left-4">

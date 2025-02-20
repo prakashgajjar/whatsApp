@@ -3,7 +3,7 @@ import Icons from './Icons'
 import contextProvider from '../../Hooks/ContextProvider'
 import axios from 'axios'
 const Input = () => {
-    const {setMessage,message,contact , setContact , headerProfile ,setHeaderProfile , setSelectedId  , selectedId } = useContext(contextProvider);
+    const {setMessage,message,contact , showEmoji , setShowEmoji  ,selectEmoji , setContact , headerProfile ,setHeaderProfile , setSelectedId  , selectedId } = useContext(contextProvider);
     const sendMessage = async () =>{
         axios.post(`http://localhost:3000/message/send/${selectedId}`, { message: message }, { withCredentials: true })
     .then(response => {
@@ -13,11 +13,20 @@ const Input = () => {
         console.error("Error:", error);
     });
     }
+      useEffect(() => {
+            if (selectEmoji) {
+                setMessage(prev => prev + selectEmoji);
+            }
+        }, [selectEmoji, setMessage]);
     return (
         <div className="bg-zinc-800 flex  items-center gap-3 w-full h-16 z-50 ">
             <div>
                 <div className='flex -space-x-4'>
-                    <Icons url="/icons/smill1.png" />
+                <div onClick={()=>{
+                        setShowEmoji(!showEmoji)
+                    }}>
+                         <Icons url="/icons/smill1.png" />
+                    </div>
                     <Icons url="/icons/doc.png" />
                 </div>
             </div>
@@ -33,6 +42,7 @@ const Input = () => {
                 <img src="/icons/send.png" className='' alt="" 
                 onClick={()=>{
                     // sendMessageToUser()
+                    setShowEmoji(false)
                     sendMessage()
                     setMessage('')
                 }}

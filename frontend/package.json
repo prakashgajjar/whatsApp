@@ -16,6 +16,7 @@
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "^9.0.3",
     "react-router-dom": "^7.1.5",
     "socket.io-client": "^4.8.1",
     "socket.io-frontend": "^0.0.2"

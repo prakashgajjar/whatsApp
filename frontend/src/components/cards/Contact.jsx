@@ -1,13 +1,18 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { CurrentUser } from './CurrentUser'
+import contextProvider from '../../Hooks/ContextProvider';
 
-const contact = ({contact , selectedId}) => {
+const contact = ({contact, selectedId}) => {
+    const {metaDisplay , messages, setMetaDisplay} = useContext(contextProvider);
+    // const [lastMessage , setLastMessage] = useState('')
     const divRef = useRef(null)
     // console.log(contact)
     return (
-        <div className='p-1 px-2'>
+        <div className='p-1 px-2' onClick={()=>{    
+            setMetaDisplay(false)
+        }}>
             <div ref={divRef} className={`h-16 rounded-md gap-3 w-full hover:bg-white hover:bg-opacity-10  text-white active:bg-white active:bg-opacity-10 flex justify-between px-2 items-center ${
-            contact.id === selectedId ? "bg-white bg-opacity-20" : ""
+            contact.id === selectedId && ! metaDisplay ? "bg-white bg-opacity-20" : ""
           }`} >
                 <div>
                     <img src={`http://localhost:3000/images/${contact.avatar}`} className='w-10 h-10 rounded-full ' alt="" />
@@ -25,4 +30,4 @@ const contact = ({contact , selectedId}) => {
     )
 }
 
-export default contact
+export default contact;
