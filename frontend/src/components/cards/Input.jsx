@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import Icons from './Icons'
 import contextProvider from '../../Hooks/ContextProvider'
 import axios from 'axios'
+import SocketMessage from '../sockets/SocketMessage'
 const Input = () => {
     const {setMessage,message,contact , showEmoji , setShowEmoji  ,selectEmoji , setContact , headerProfile ,setHeaderProfile , setSelectedId  , selectedId } = useContext(contextProvider);
     const sendMessage = async () =>{
@@ -12,6 +13,7 @@ const Input = () => {
     .catch(error => {
         console.error("Error:", error);
     });
+    SocketMessage();
     }
       useEffect(() => {
             if (selectEmoji) {
@@ -38,7 +40,7 @@ const Input = () => {
                     }}
                     placeholder='Type a message' />
             </div>
-            <div className='flex justify-center items-center ml-2 -mt-2'>
+            <div className='flex absolute right-5 justify-center items-center  ml-2 -mt-2'>
                 <img src="/icons/send.png" className='' alt="" 
                 onClick={()=>{
                     // sendMessageToUser()

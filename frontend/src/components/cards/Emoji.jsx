@@ -7,7 +7,7 @@ const Emoji = () => {
 
     const getEmoji = async () => {
         try {
-            const response = await axios.get('https://emoji-api.com/emojis?access_key=4e929608ccf7ad924f32c987804dc0f3d1a144b2'); 
+            const response = await axios.get('https://emoji-api.com/emojis?access_key=ab2d9e4d611c11d00b70cd15dd1f631446f55f10'); 
             setEmoji(response.data.map((emoji) => emoji.character));
         } catch (error) {
             console.error('Error fetching emojis:', error);

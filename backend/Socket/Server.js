@@ -13,6 +13,13 @@ const io = new Server(server, {
         credentials: true, 
     }
 })
+
+//messages 
+ const getReceiverSocketId = (userId) => {
+    return usersSocket[userId];
+}
+
+
 const usersSocket  = {}
 
 io.on('connection', (socket) => {
@@ -27,7 +34,6 @@ io.on('connection', (socket) => {
     usersSocket[userId] = socket.id;
 }
     console.log(usersSocket);
-
     io.emit("getOnlineUser" , Object.keys(usersSocket));
 
    socket.on('disconnect', () => {
@@ -39,4 +45,4 @@ io.on('connection', (socket) => {
 
 
 
-module.exports = {app, server ,io};
+module.exports = {app, server ,io , getReceiverSocketId};

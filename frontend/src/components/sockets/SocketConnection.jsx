@@ -5,9 +5,9 @@ import contextProvider from '../../Hooks/ContextProvider'
 
 const SocketConnection = () => {
     const {socket, setSocket, onlineUser, setOnlineUser } = useContext(socketProvider)
-    const {currentUserId} = useContext(contextProvider);
-    const socketConnected = async ()=>{
-      const socket = await io('http://localhost:3000' ,{
+    const {currentUserId  , setMessage , message} = useContext(contextProvider);
+    const socketConnected = ()=>{
+      const socket = io('http://localhost:3000' ,{
         query:{
           userId:currentUserId
         }
@@ -24,6 +24,7 @@ const SocketConnection = () => {
             socket.close()
         }
     }
+
     useEffect(()=>{
       socketConnected()
     },[currentUserId])
