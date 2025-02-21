@@ -1,9 +1,13 @@
 import React, { useContext, useRef } from 'react'
 import { CurrentUser } from './CurrentUser'
 import contextProvider from '../../Hooks/ContextProvider';
+import socketProvider from '../../Hooks/SocketProvider';
 
 const contact = ({contact, selectedId}) => {
     const {metaDisplay , messages, setMetaDisplay} = useContext(contextProvider);
+    const {onlineUser} = useContext(socketProvider)
+    const isOnline = onlineUser.includes(contact.id); 
+
     // const [lastMessage , setLastMessage] = useState('')
     const divRef = useRef(null)
     // console.log(contact)
@@ -17,9 +21,9 @@ const contact = ({contact, selectedId}) => {
                 <div>
                     <img src={`http://localhost:3000/images/${contact.avatar}`} className='w-10 h-10 rounded-full ' alt="" />
                 </div>
-                <div className=''>
+                <div className=' w-20 '>
                     <h1 className='font-semibold cursor-default'>{contact.name}</h1>
-                    <p className='text-sm font-light opacity-70 cursor-default'>hii, i am prakash</p>
+                    <p className='text-sm font-light opacity-70 cursor-default'>{isOnline ? "Online" : "Offline"}</p>
                 </div>
                 <div>
                     <CurrentUser/>

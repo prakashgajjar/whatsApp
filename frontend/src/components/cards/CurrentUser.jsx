@@ -9,6 +9,7 @@ export const CurrentUser = () => {
               withCredentials: true,
             });
             setCurrentUser(response.data._id);
+            console.log(currentUserId);
             
           } catch (error) {
             console.error("Error fetching chat:", error);
