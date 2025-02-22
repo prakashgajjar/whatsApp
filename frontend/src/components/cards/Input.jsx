@@ -34,7 +34,7 @@ const Input = () => {
             </div>
             <div className='flex justify-center items-center'>
                 <input type="text" className='w-[1450px] rounded-mdx`  h-10 mb-3 outline-none bg-transparent text-white  ml-2'
-                    value={message}
+                    value={message.content}
                     onChange={(event) => {
                         setMessage(event.target.value)
                     }}
@@ -46,7 +46,6 @@ const Input = () => {
                     // sendMessageToUser()
                     setShowEmoji(false)
                     sendMessage()
-                    setMessage('')
                 }}
                 />
             </div>

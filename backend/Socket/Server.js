@@ -19,7 +19,6 @@ const io = new Server(server, {
     return usersSocket[userId];
 }
 
-
 const usersSocket  = {}
 
 io.on('connection', (socket) => {
@@ -27,7 +26,7 @@ io.on('connection', (socket) => {
 
  const userId = socket.handshake.query.userId;
  if (userId) {
-    // Remove any old socket ID if user already connected
+ 
     if (usersSocket[userId]) {
         delete usersSocket[userId];
     }

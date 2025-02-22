@@ -1,14 +1,16 @@
-import React, { useContext, useEffect, useRef, useCallback } from "react";
-import HeaderProfile from "../cards/HeaderProfile";
+import React, { useContext, useEffect, useRef, useCallback, useState } from "react";
 import ContextProvider from "../../Hooks/ContextProvider";
 import axios from "axios";
 import Emoji from "../cards/Emoji";
-import SocketMessage from "../sockets/SocketMessage";
+import socketProvider from "../../Hooks/SocketProvider";
 
 const ChatMain = () => {
   const { selectedId, showEmoji, currentUserId, messages, setMessages } = useContext(ContextProvider);
+  const { socket } = useContext(socketProvider);
   const chatEndRef = useRef(null);
+  const [messageText, setMessageText] = useState(""); // Track input message
 
+  // Fetch chat messages when user selects a chat
   const getAllChat = useCallback(async () => {
     if (!selectedId) return;
     try {
@@ -21,10 +23,62 @@ const ChatMain = () => {
     }
   }, [selectedId, setMessages]);
 
-
   useEffect(() => {
     getAllChat();
   }, [selectedId, getAllChat]);
+
+  // 📌 Listen for incoming messages from the socket
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewMessage = (newMessage) => {
+      console.log("Received message:", newMessage);
+      setMessages((prevMessages) => [...prevMessages, newMessage]); // Update messages state
+    };
+
+    socket.on("newMessage", handleNewMessage);
+
+    return () => {
+      socket.off("newMessage", handleNewMessage);
+    };
+  }, [socket, setMessages]);
+
+  // 📌 Send Message Function
+  const sendMessage = async () => {
+    if (!messageText.trim()) return; // Prevent sending empty messages
+
+    const newMessage = {
+      _id: Date.now().toString(), // Temporary ID
+      sender: { _id: currentUserId },
+      receiver: selectedId,
+      content: messageText,
+      createdAt: new Date().toISOString(),
+      messageType: "text",
+      isDelivered: false,
+      isSeen: false,
+    };
+
+    // 1️⃣ Add Message Instantly to UI
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    setMessageText(""); // Clear input field
+
+    // 2️⃣ Emit Message to Socket Server
+    socket.emit("sendMessage", newMessage);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/message/send",
+        { receiver: selectedId, content: messageText },
+        { withCredentials: true }
+      );
+
+      if (response.data) {
+        console.log("Message sent successfully:", response.data);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   return (
     <div className="contact flex flex-col h-[826.5px] bg-zinc-800 p-4">
@@ -58,10 +112,8 @@ const ChatMain = () => {
       <div className={`z-50 absolute bottom-16 contact ${showEmoji ? "block" : "hidden"}`}>
         <Emoji />
       </div>
-
-      <SocketMessage />
-    </div>
+</div>
   );
-};
+}
 
 export default ChatMain;

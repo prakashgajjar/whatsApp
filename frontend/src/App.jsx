@@ -7,6 +7,7 @@ import socketProvider from './Hooks/SocketProvider'
 import MetaDisplay from './components/metaAI/MetaDisplay'
 import './App.css'
 import SocketConnection from './components/sockets/SocketConnection'
+import SocketMessage from './components/sockets/SocketMessage'
 
 const App = () => {
 
@@ -43,6 +44,7 @@ const App = () => {
         </div>
         <div>
         <SocketConnection />
+        <SocketMessage/>
         </div>
         </socketProvider.Provider>
       </ContextProvider.Provider>

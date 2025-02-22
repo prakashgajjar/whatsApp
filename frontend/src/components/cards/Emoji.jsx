@@ -14,7 +14,7 @@ const Emoji = () => {
         }
     };
     useEffect(() => {
-        getEmoji();
+        // getEmoji();
     }, []);
 
     return (

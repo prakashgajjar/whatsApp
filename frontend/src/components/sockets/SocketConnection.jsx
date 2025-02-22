@@ -16,15 +16,12 @@ const SocketConnection = () => {
       
       socket.on('getOnlineUser', (user) => {
         setOnlineUser(user)
-        console.log('socket disconnected from socketconnection.jsx')
       })
-      console.log(currentUserId , "Connected")
 
         return () => {
             socket.close()
         }
     }
-
     useEffect(()=>{
       socketConnected()
     },[currentUserId])
