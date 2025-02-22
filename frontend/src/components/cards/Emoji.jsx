@@ -7,14 +7,14 @@ const Emoji = () => {
 
     const getEmoji = async () => {
         try {
-            const response = await axios.get('https://emoji-api.com/emojis?access_key=ab2d9e4d611c11d00b70cd15dd1f631446f55f10'); 
+            const response = await axios.get('https://emoji-api.com/emojis?access_key=915e7de850ca49c9f78da55e7daa176e4372b70c'); 
             setEmoji(response.data.map((emoji) => emoji.character));
         } catch (error) {
             console.error('Error fetching emojis:', error);
         }
     };
     useEffect(() => {
-        // getEmoji();
+        getEmoji();
     }, []);
 
     return (
