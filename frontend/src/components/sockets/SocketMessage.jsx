@@ -13,7 +13,7 @@ const SocketMessage = () => {
             console.log("New message received:", newMessage); // Debug message format
         
             // Ensure newMessage is valid before updating state
-            if (newMessage && newMessage.content) {
+            if (newMessage) {
                 setMessages((prevMessages) => [...prevMessages, newMessage]); 
             } else {
                 console.error("Invalid message format:", newMessage);

@@ -44,7 +44,6 @@ const App = () => {
         </div>
         <div>
         <SocketConnection />
-        <SocketMessage/>
         </div>
         </socketProvider.Provider>
       </ContextProvider.Provider>
