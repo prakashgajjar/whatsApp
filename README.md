@@ -5,7 +5,7 @@
 ## 🚀 Introduction
 This is a **WhatsApp-like web application** built using the **MERN stack** (MongoDB, Express.js, React, Node.js) with real-time messaging capabilities powered by **Socket.io**. Unlike traditional messaging apps, our version introduces **unique features** to enhance user experience and security.
 
-## ✨ Unique Features in Future
+## ✨ Unique Features
 ### 🔹 AI-Powered Chatbot
 - Integrated AI assistant for quick responses, conversation summaries, and real-time translations.
 
