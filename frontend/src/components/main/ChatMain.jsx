@@ -10,7 +10,7 @@ const ChatMain = () => {
   const chatEndRef = useRef(null);
   const [messageText, setMessageText] = useState(""); // Track input message
 
-  // Fetch chat messages when user selects a chat
+
   const getAllChat = useCallback(async () => {
     if (!selectedId) return;
     try {
@@ -27,13 +27,13 @@ const ChatMain = () => {
     getAllChat();
   }, [selectedId, getAllChat]);
 
-  // 📌 Listen for incoming messages from the socket
+
   useEffect(() => {
     if (!socket) return;
 
     const handleNewMessage = (newMessage) => {
       console.log("Received message:", newMessage);
-      setMessages((prevMessages) => [...prevMessages, newMessage]); // Update messages state
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
     };
 
     socket.on("newMessage", handleNewMessage);
@@ -43,12 +43,11 @@ const ChatMain = () => {
     };
   }, [socket, setMessages]);
 
-  // 📌 Send Message Function
   const sendMessage = async () => {
-    if (!messageText.trim()) return; // Prevent sending empty messages
+    if (!messageText.trim()) return;
 
     const newMessage = {
-      _id: Date.now().toString(), // Temporary ID
+      _id: Date.now().toString(), // Temp id
       sender: { _id: currentUserId },
       receiver: selectedId,
       content: messageText,
@@ -58,11 +57,11 @@ const ChatMain = () => {
       isSeen: false,
     };
 
-    // 1️⃣ Add Message Instantly to UI
+    // Add Message Instantly to UI
     setMessages((prevMessages) => [...prevMessages, newMessage]);
-    setMessageText(""); // Clear input field
+    setMessageText("");
 
-    // 2️⃣ Emit Message to Socket Server
+  
     socket.emit("sendMessage", newMessage);
 
     try {
@@ -80,9 +79,15 @@ const ChatMain = () => {
     }
   };
 
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollTop = chatEndRef.current.scrollHeight;
+    }
+  }, [messages]); 
   return (
     <div className="contact flex flex-col h-[826.5px] bg-zinc-800 p-4">
-      <div className="contact flex-1 overflow-y-auto space-y-3">
+      <div className=" contact flex-1 overflow-y-auto space-y-3" ref={chatEndRef} >
+        
         {messages.length > 0 ? (
           messages.map((msg, index) => (
             <div
@@ -91,7 +96,7 @@ const ChatMain = () => {
                 msg.sender._id === currentUserId ? "bg-[#025C4C] text-white ml-auto" : "bg-zinc-900 text-white mr-auto"
               }`}
             >
-              <div className="flex justify-between">
+              <div className="flex justify-between" >
                 <h1>{msg.content}</h1>
                 <p className="text-xs font-semibold text-gray-300 mt-2">
                   {new Date(msg.createdAt).toLocaleTimeString([], {
@@ -106,7 +111,6 @@ const ChatMain = () => {
         ) : (
           <p className="text-center text-gray-400">No messages yet...</p>
         )}
-        <div ref={chatEndRef}></div>
       </div>
 
       <div className={`z-50 absolute bottom-16 contact ${showEmoji ? "block" : "hidden"}`}>

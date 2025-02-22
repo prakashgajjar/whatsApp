@@ -11,7 +11,7 @@ const Input = () => {
     } = useContext(contextProvider);
 
     const sendMessage = async () => {
-        if (!message.trim()) return; // Prevent empty messages
+        if (!message.trim()) return;
 
         const newMessage = {
             sender: {_id : currentUserId},
@@ -32,11 +32,7 @@ const Input = () => {
         } catch (error) {
             console.error("Error:", error);
         }
-
-        // **2️⃣ Clear the input field**
         setMessage("");
-
-        // **3️⃣ Send message via WebSocket**
         SocketMessage(newMessage);
     };
 
